@@ -1,5 +1,6 @@
 import os
 import numpy as np
+from scipy.io import loadmat
 
 def init_data(config):
     path = os.path.join(config.data_path, config.subject + config.task +
@@ -17,7 +18,7 @@ def init_data(config):
     task = loadmat(path, matlab_compatible=True)
 
     # initialize data dictionary
-    data = dict({'name': config.subject + config.task + ('C' if config.cooling else '') + '_' + config.seed})
+    data = dict({'name': config.subject + config.task + ('C' if config.cooling else '') + '_' + str(config.seed)})
     
     behavior = task['task'][0,0]['pillow'][0,0]
     

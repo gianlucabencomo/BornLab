@@ -11,7 +11,7 @@ def get_config():
     parser.add_argument('-t', '--task', type=str,
                         choices=['C', 'O', 'I', 'I19', 'C19'],
                         required=True,
-                        help='Task Selection: Cardinal (C), Oblique (O), Interleaved (I), 
+                        help='Task Selection: Cardinal (C), Oblique (O), Interleaved (I), \
                                 Interleaved 2019 (I19, Apollo Only), Cardinal 2019 (C19, Apollo Only).')
     parser.add_argument('-c', '--cooling', action='store_true',
                         help='Flag indicating whether or not cooling session is desired.')
@@ -34,7 +34,8 @@ def get_config():
     parser.add_argument('-f', '--folds', type=int,
                         default=10,
                         help='Number of folds for cross-validation.')
-    
+    parser.add_argument('-p', '--plot', action='store_true',
+                        help='Flag indicating whether or not plots should be made after training.')    
     
     # TODO : Finish adding and modifying configurations
     

@@ -1,0 +1,9 @@
+13 June 2022
+
+I have made some decent progress cleaning up and building out my analysis pipeline.  By the end, I hope to have a pipeline that integrates well into rlange's pipeline.
+
+Some considerations:
+1) I must be using rlange's suite of task loading functions that way anyone with his configurations can use my code.  It will make it easier for rlange to use my code.
+2) Everything starts in Matlab so it should also end in Matlab.  Some of the visualizations can be done in python but I imagine that rlange would like all of the outputs of the model to be able to be analyzed in Matlab.
+
+This Thursday, when we have our group meeting, I should table a conversation about the load task data functions and the best way to use them for my analysis and I should also ask rlange what he wants on the output side.  I will write a little bit of code every day, in between my work for Griffiths and ml readings.

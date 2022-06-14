@@ -1,0 +1,3 @@
+14 June 2022
+
+Currently, I am running the most simple model with the cleaned up code.  I am happy with the progress.  Now I need to integrate cooling, interleaved functionality, clean up the plotting functions, finish the config files.  Thereafter, I can start to think about the Matlab stuff, which is significantly more messy!
