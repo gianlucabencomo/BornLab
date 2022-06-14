@@ -63,7 +63,7 @@ def train(data, weights, config):
         })
     np.savez_compressed(config.save_path, save_dict=save_dict)
     
-    return wMode, data, weights, credibleInt, test_results, cvll, hyp, duration
+    return wMode, data, weights, credibleInt, test_results, cvll, hyp, (end - start)
     
 def main():
     
