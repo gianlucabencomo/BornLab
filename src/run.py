@@ -59,7 +59,7 @@ def train(data, weights, config):
             "credibleInt": credibleInt,
             "cvll": cvll,
             "hyp": hyp,
-            "duration": END - START,
+            "duration": end - start,
         })
     np.savez_compressed(config.save_path, save_dict=save_dict)
     
@@ -79,15 +79,16 @@ def main():
     print(f'\nLoading and Initializing Data... (Subject: {config.subject}, Task: {config.task}, Cooling: {config.cooling}, Seed: {config.seed})')
     weights, data = init_data(config)
      
-    # TODO : training loop
     wMode, data, weights, credibleInt, test_results, cvll, hyp, duration = train(data, weights, config)
+    # TODO : add training functionality for cooling / interleaved
     
-    # TODO : plotting    
     from pillow.plot.analysisFunctions import makeWeightPlot
     
+    # plot time-series
     if config.plot:
         makeWeightPlot(wMode, data, weights, END=100000, errorbar=credibleInt,
                         perf_plot=True, bias_plot=True, prediction=test_results)    
+    # TODO : add plotting functionality for cooling / interleaved
 
 if __name__ == '__main__':
     main()
