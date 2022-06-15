@@ -61,7 +61,7 @@ def train(data, weights, config):
             "hyp": hyp,
             "duration": end - start,
         })
-    np.savez_compressed(config.save_path, save_dict=save_dict)
+    np.savez_compressed(os.path.join(config.save_path, data['name']), save_dict=save_dict)
     
     return wMode, data, weights, credibleInt, test_results, cvll, hyp, (end - start)
     
@@ -88,6 +88,8 @@ def main():
     if config.plot:
         makeWeightPlot(wMode, data, weights, END=100000, errorbar=credibleInt,
                         perf_plot=True, bias_plot=True, prediction=test_results)    
+        plt.show()
+
     # TODO : add plotting functionality for cooling / interleaved
 
 if __name__ == '__main__':
