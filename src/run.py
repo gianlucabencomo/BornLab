@@ -1,6 +1,7 @@
 import os
 import time
 import numpy as np
+import matplotlib.pyplot as plt
 
 from config import get_config
 from data import init_data
@@ -69,7 +70,10 @@ def main():
     
     config = get_config().parse_args()
     
-    # set up file system
+    # set random seed globally
+    np.random.seed(config.seed)
+    
+    # check / set up file system
     if not os.path.exists(config.data_path): 
         os.makedirs(config.data_path)
     if not os.path.exists(config.save_path):
@@ -86,8 +90,9 @@ def main():
     
     # plot time-series
     if config.plot:
-        makeWeightPlot(wMode, data, weights, END=100000, errorbar=credibleInt,
-                        perf_plot=True, bias_plot=True, prediction=test_results)    
+        makeWeightPlot(wMode, data, weights, errorbar=credibleInt,
+                        perf_plot=True, bias_plot=True, temperature=False, 
+                        prediction=test_results)    
         plt.show()
 
     # TODO : add plotting functionality for cooling / interleaved

@@ -2,6 +2,10 @@ import os
 import numpy as np
 from scipy.io import loadmat
 
+def standardize(data):
+    # zero-mean + normalize
+    return (data - data.mean()) / data.std()
+
 def init_data(config):
     path = os.path.join(config.data_path, config.subject + config.task +
             ('C' if config.cooling else ''), 'ConcatTaskData.mat')
@@ -33,12 +37,13 @@ def init_data(config):
     stim_1 = behavior['stim_1'][:]
     stim_2 = behavior['stim_2'][:]
     stim_reward = stimulus_strength * reward_history
+    temperature = behavior['temp'][:]
 
     if config.standardize:
-        # zero-mean + normalize
-        stimulus_strength = (stimulus_strength - stimulus_strength.mean()) / stimulus_strength.std()
-        stim_1 = (stim_1 - stim_1.mean()) / stim_1.std()
-        stim_2 = (stim_2 - stim_2.mean()) / stim_2.std()
+        stimulus_strength = standardize(stimulus_strength)
+        stim_1 = standardize(stim_1)
+        stim_2 = standardize(stim_2)
+        temp_standard = standardize(temperature)
    
     # convert to dict formate
     stimulus_strength = {'stimulus_strength': stimulus_strength} 
@@ -49,6 +54,8 @@ def init_data(config):
     inputs['inputs']['StimulusStrength*RewardHistory'] = stim_reward
     inputs['inputs']['stim_1'] = stim_1
     inputs['inputs']['stim_2'] = stim_2
+    inputs['inputs']['temperature'] = temperature
+    inputs['inputs']['temperature_standard'] = temp_standard
 
     # finalize return type
     data.update(y)

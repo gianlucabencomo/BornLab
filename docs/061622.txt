@@ -1,0 +1,11 @@
+Born Lab - Research Note 
+16 June 2022
+Pre-Meeting Check-In
+
+1) I have been making a lot of headway with cleaning up my analysis.  I am very close to being complete.
+2) There are a few considerations:
+	a.) The best way to integrate my pipeline into Richard's.  Ideally, Richard can play with the TaskData data type in matlab and select a sequential series of sessions to easily run my analysis on and have the output return to matlab.  This is something for Richard and I to discuss at a different meeting most likely!
+	b.) In what format would we like to run models and visualize?  What I mean is that the dynamic LR is really easy to imagine in the single task, no cooling setting but how would we like to have things go for the interleaved, cooling, and interleaved cooling tasks.  Something to think about!
+
+In Summary
+I am making progress but I should probably meet with Richard.  I am preparing a private git repo for everyone to easily clone and get started with my work.  Things have been going well and I am confident that I will have something easy to use and beneficial to the analysis.  

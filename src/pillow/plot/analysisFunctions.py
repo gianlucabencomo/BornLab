@@ -12,6 +12,7 @@ def makeWeightPlot(wMode,
                    END=0,
                    perf_plot=False,
                    bias_plot=False,
+                   temperature=False,
                    prediction=None,
                    errorbar=None):
     """Generates a visualization of weights and related plots
