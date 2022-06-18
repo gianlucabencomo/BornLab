@@ -54,34 +54,24 @@ optional arguments:
 
 ## Regraph
 
-The `predict.py` script is provided to run a trained model on any given input image.
+The `regraph.py` script is provided to re-visualize trained models found in `.\output`.
 
 ```
-Usage: predict.py [OPTIONS]
+usage: regraph.py [-h] -dp DATA_PATH [-p] [-b] [-t]
 
-Options:
-  -d, --dataset [vgg|mbm|dcc|adi]
-                                  Dataset to pull image from (HDF5).
-                                  [required]
-
-  -i, --index INTEGER             Image index to visualize.
-  -c, --checkpoint FILENAME       A path to a checkpoint with weights.
-                                  [required]
-
-  -u, --unet_filters INTEGER      Number of filters for U-Net convolutional
-                                  layers.
-
-  -co, --convolutions INTEGER     Number of layers in a convolutional block.
-  -v, --visualize                 Visualize predicted density map.
-  --help                          Show this message and exit.
-
+optional arguments:
+  -h, --help            show this help message and exit
+  -dp DATA_PATH, --data_path DATA_PATH
+                        File path to data.
+  -p, --perf            Plot performance.
+  -b, --bias            Plot bias.
+  -t, --temp            Plot temperature.
 ```
 
-### Examples
+### Example
 
 ```
 $ python run.py -s A -t C --standardize --plot                                   
 ```
 
 ![](./etc/example.png)
-
