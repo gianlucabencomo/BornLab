@@ -10,7 +10,8 @@ def init_data(config):
     path = os.path.join(config.data_path, config.subject + config.task +
             ('C' if config.cooling else ''), 'ConcatTaskData.mat')
     if not os.path.exists(path):
-        pass
+        
+        raise NotImplementedError()
         # TO-DO : create appropriate ConcatTaskData.mat file
 
     # set up weight dictionary
@@ -37,13 +38,15 @@ def init_data(config):
     stim_1 = behavior['stim_1'][:]
     stim_2 = behavior['stim_2'][:]
     stim_reward = stimulus_strength * reward_history
-    temperature = behavior['temp'][:]
+    if config.cooling:
+        temperature = behavior['temp'][:]
 
     if config.standardize:
         stimulus_strength = standardize(stimulus_strength)
         stim_1 = standardize(stim_1)
         stim_2 = standardize(stim_2)
-        temp_standard = standardize(temperature)
+        if config.cooling:
+            temp_standard = standardize(temperature)
    
     # convert to dict formate
     stimulus_strength = {'stimulus_strength': stimulus_strength} 
@@ -51,11 +54,12 @@ def init_data(config):
     # create inputs data type
     inputs = dict({'inputs': stimulus_strength})
     inputs['inputs']['reward_history'] = reward_history
-    inputs['inputs']['StimulusStrength*RewardHistory'] = stim_reward
+    inputs['inputs']['stimulus_reward'] = stim_reward
     inputs['inputs']['stim_1'] = stim_1
     inputs['inputs']['stim_2'] = stim_2
-    inputs['inputs']['temperature'] = temperature
-    inputs['inputs']['temperature_standard'] = temp_standard
+    if config.cooling:
+        inputs['inputs']['temperature'] = temperature
+        inputs['inputs']['temperature_standard'] = temp_standard
 
     # finalize return type
     data.update(y)

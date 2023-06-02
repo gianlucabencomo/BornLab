@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from config import get_config
 from data import init_data
 
+# TODO : add better comments
+
 def train(data, weights, config):
     
     start = time.time()
@@ -69,7 +71,13 @@ def train(data, weights, config):
 def main():
     
     config = get_config().parse_args()
-    
+
+    # check for valid subject/task
+    assert (config.subject + config.task + ('C' if config.cooling else '')) in \
+            ['AC'], 'Subject/Task selection invalid!' # supported
+
+    # TODO : add supported subject/tasks to config file and import
+        
     # set random seed globally
     np.random.seed(config.seed)
     
@@ -82,10 +90,13 @@ def main():
     # load data
     print(f'\nLoading and Initializing Data... (Subject: {config.subject}, Task: {config.task}, Cooling: {config.cooling}, Seed: {config.seed})')
     weights, data = init_data(config)
-     
-    wMode, data, weights, credibleInt, test_results, cvll, hyp, duration = train(data, weights, config)
-    # TODO : add training functionality for cooling / interleaved
     
+    if config.task in ['C','O','C19']:
+        wMode, data, weights, credibleInt, test_results, cvll, hyp, duration = train(data, weights, config)
+    else:
+        # TODO : add training functionality for interleaved
+        print('Interleaved functionality unavailable')
+
     from pillow.plot.analysisFunctions import makeWeightPlot
     
     # plot time-series
@@ -95,7 +106,7 @@ def main():
                         prediction=test_results)    
         plt.show()
 
-    # TODO : add plotting functionality for cooling / interleaved
+    # TODO : add plotting functionality for interleaved
 
 if __name__ == '__main__':
     main()

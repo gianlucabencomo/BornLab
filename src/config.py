@@ -20,17 +20,20 @@ def get_config():
                         help='Specify a manual seed. Otherwise random.')
     parser.add_argument('-dp', '--data_path', type=str,
                         default=os.path.join(os.path.dirname(os.getcwd()), 'data'), 
-                        help='Data path to save to.')
+                        help='Data path to save to. Default = ../data/.')
     parser.add_argument('-sp', '--save_path', type=str,
                         default=os.path.join(os.path.dirname(os.getcwd()), 'output'), 
-                        help='Experimental path to save to.') 
+                        help='Experimental path to save to. Default = ../output/.') 
     parser.add_argument('-w', '--weights', nargs='+', 
                         default=['bias', 'stimulus_strength'],
-                        help='List of weights to use. Supported options: .') # TODO : add supported options
+                        help='List of weights to use. Supported options: [bias, stimulus_strength, \
+                        reward_history, stim_1, stim_2, avg_stim, Stimulus_Reward, \
+                        stim0, stim45, stim90, stim135]. Default = [bias, stimulus_strength].')
     parser.add_argument('-std', '--standardize', action='store_true',
                         help='Zero-mean and normalize data over entire session if set to true.')
     parser.add_argument('-o', '--optList', nargs='+',
-                        default=['sigma', 'sigDay'],) # TODO: add help description
+                        default=['sigma', 'sigDay'],
+                        help='List of hyperparameters to optimize over. Default = [sigma, sigDay].')
     parser.add_argument('-f', '--folds', type=int,
                         default=10,
                         help='Number of folds for cross-validation.')
